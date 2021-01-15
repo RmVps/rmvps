@@ -15,14 +15,14 @@ echo -e "$ipdovps" >/etc/IP
 echo -e "America/Sao_Paulo" >/etc/timezone
 ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime >/dev/null 2>&1
 dpkg-reconfigure --frontend noninteractive tzdata >/dev/null 2>&1
-[[ ! -d /etc/CrashVPN ]] && mkdir /etc/CrashVPN
-[[ ! -d /etc/CrashVPN/senha ]] && mkdir /etc/CrashVPN/senha
-[[ ! -e /etc/CrashVPN/Exp ]] && touch /etc/CrashVPN/Exp
-[[ ! -d /etc/CrashVPN/userteste ]] && mkdir /etc/CrashVPN/userteste
-[[ ! -d /etc/CrashVPN2 ]] && mkdir /etc/CrashVPN2
-[[ ! -d /etc/CrashVPN2/senha ]] && mkdir /etc/CrashVPN2/senha
-[[ ! -e /etc/CrashVPN2/Exp ]] && touch /etc/CrashVPN2/Exp
-[[ ! -d /etc/CrashVPN2/userteste ]] && mkdir /etc/CrashVPN2/userteste
+[[ ! -d /etc/NetOn ]] && mkdir /etc/NetOn
+[[ ! -d /etc/NetOn/senha ]] && mkdir /etc/NetOn/senha
+[[ ! -e /etc/NetOn/Exp ]] && touch /etc/NetOn/Exp
+[[ ! -d /etc/NetOn/userteste ]] && mkdir /etc/NetOn/userteste
+[[ ! -d /etc/NetOn2 ]] && mkdir /etc/NetOn2
+[[ ! -d /etc/NetOn2/senha ]] && mkdir /etc/NetOn2/senha
+[[ ! -e /etc/NetOn2/Exp ]] && touch /etc/NetOn2/Exp
+[[ ! -d /etc/NetOn2/userteste ]] && mkdir /etc/NetOn2/userteste
 [[ ! -d /etc/bot ]] && mkdir /etc/bot
 [[ ! -d /etc/bot/info-users ]] && mkdir /etc/bot/info-users
 [[ ! -d /etc/bot/arquivos ]] && mkdir /etc/bot/arquivos
@@ -30,173 +30,173 @@ dpkg-reconfigure --frontend noninteractive tzdata >/dev/null 2>&1
 [[ ! -d /etc/bot/suspensos ]] && mkdir /etc/bot/suspensos
 [[ ! -e /etc/bot/lista_ativos ]] && touch /etc/bot/lista_ativos
 [[ ! -e /etc/bot/lista_suspensos ]] && touch /etc/bot/lista_suspensos
-echo -e 'by: @openersfamily' > /usr/lib/CrashVPN && cat /usr/lib/CrashVPN > /usr/lib/licence
+echo -e 'by: @openersfamily' > /usr/lib/NetOn && cat /usr/lib/NetOn > /usr/lib/licence
 netstat -nplt | grep -w 'apache2' | grep -w '80' && sed -i "s/Listen 80/Listen 81/g" /etc/apache2/ports.conf && service apache2 restart
 [[ "$(grep -o '#Port 22' /etc/ssh/sshd_config)" == "#Port 22" ]] && sed -i "s;#Port 22;Port 22;" /etc/ssh/sshd_config && service ssh restart
 grep -v "^PasswordAuthentication" /etc/ssh/sshd_config >/tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
 echo "PasswordAuthentication yes" >>/etc/ssh/sshd_config
-echo -e 'by: @penguinehis' >/usr/lib/crashvpn2
+echo -e 'by: @penguinehis' >/usr/lib/NetOn2
 echo -e 'by: @penguinehis' >/usr/lib/licence2
 service ssh restart
 clear
 echo -e "      \033[1;33mDOWNLOAD: 0% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/addhost.sh -O /bin/addhost > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/addhost.sh -O /bin/addhost > /dev/null 2>&1
 chmod +x /bin/addhost
 clear
 echo -e "      \033[1;33mDOWNLOAD: 2.3% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/ajuda.sh -O /bin/ajuda > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/ajuda.sh -O /bin/ajuda > /dev/null 2>&1
 chmod +x /bin/ajuda
 clear
 echo -e "      \033[1;33mDOWNLOAD: 4.6% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/alterarlimite.sh -O /bin/alterarlimite > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/alterarlimite.sh -O /bin/alterarlimite > /dev/null 2>&1
 chmod +x /bin/alterarlimite
 clear
 echo -e "      \033[1;33mDOWNLOAD: 6.9% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/alterarsenha.sh -O /bin/alterarsenha > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/alterarsenha.sh -O /bin/alterarsenha > /dev/null 2>&1
 chmod +x /bin/alterarsenha
 clear
 echo -e "      \033[1;33mDOWNLOAD: 9.2% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/attscript.sh -O /bin/attscript > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/attscript.sh -O /bin/attscript > /dev/null 2>&1
 chmod +x /bin/attscript
 clear
 echo -e "      \033[1;33mDOWNLOAD: 11.5% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/badvpn.sh -O /bin/badvpn > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/badvpn.sh -O /bin/badvpn > /dev/null 2>&1
 chmod +x /bin/badvpn
 clear
 echo -e "      \033[1;33mDOWNLOAD: 13.8% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/banner.sh -O /bin/banner > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/banner.sh -O /bin/banner > /dev/null 2>&1
 chmod +x /bin/banner
 clear
 echo -e "      \033[1;33mDOWNLOAD: 16.1% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/blockt.sh -O /bin/blockt > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/blockt.sh -O /bin/blockt > /dev/null 2>&1
 chmod +x /bin/blockt
 clear
 echo -e "      \033[1;33mDOWNLOAD: 18.4% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/botssh.sh -O /bin/botssh > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/botssh.sh -O /bin/botssh > /dev/null 2>&1
 chmod +x /bin/botssh
 clear
 echo -e "      \033[1;33mDOWNLOAD: 20.7% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/conexao.sh -O /bin/conexao > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/conexao.sh -O /bin/conexao > /dev/null 2>&1
 chmod +x /bin/conexao
 clear
 echo -e "      \033[1;33mDOWNLOAD: 23% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/criarteste.sh -O /bin/criarteste > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/criarteste.sh -O /bin/criarteste > /dev/null 2>&1
 chmod +x /bin/criarteste
 clear
 echo -e "      \033[1;33mDOWNLOAD: 25.3% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/criarusuario.sh -O /bin/criarusuario > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/criarusuario.sh -O /bin/criarusuario > /dev/null 2>&1
 chmod +x /bin/criarusuario
 clear
 echo -e "      \033[1;33mDOWNLOAD: 27.5% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/delhost.sh -O /bin/delhost > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/delhost.sh -O /bin/delhost > /dev/null 2>&1
 chmod +x /bin/delhost
 clear
 echo -e "      \033[1;33mDOWNLOAD: 29.8% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/delscript.sh -O /bin/delscript > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/delscript.sh -O /bin/delscript > /dev/null 2>&1
 chmod +x /bin/delscript
 clear
 clear && echo -e "      \033[1;33mDOWNLOAD: 32.1% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/detalhes.sh -O /bin/detalhes > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/detalhes.sh -O /bin/detalhes > /dev/null 2>&1
 chmod +x /bin/detalhes
 clear && echo -e "      \033[1;33mDOWNLOAD: 35.4% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/droplimiter.sh -O /bin/droplimiter > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/droplimiter.sh -O /bin/droplimiter > /dev/null 2>&1
 chmod +x /bin/droplimiter
 clear && echo -e "      \033[1;33mDOWNLOAD: 38.7% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/expcleaner.sh -O /bin/expcleaner > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/expcleaner.sh -O /bin/expcleaner > /dev/null 2>&1
 chmod +x /bin/expcleaner
 clear && echo -e "      \033[1;33mDOWNLOAD: 41% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/infousers.sh -O /bin/infousers > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/infousers.sh -O /bin/infousers > /dev/null 2>&1
 chmod +x /bin/infousers
 clear && echo -e "      \033[1;33mDOWNLOAD: 44.3% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/limiter.sh -O /bin/limiter > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/limiter.sh -O /bin/limiter > /dev/null 2>&1
 dos2unix /bin/limiter
 clear && echo -e "      \033[1;33mDOWNLOAD: 48% \033[0m" && sleep 1
 chmod +x /bin/limiter
 clear && echo -e "      \033[1;33mDOWNLOAD: 50% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/menu.sh -O /bin/menu > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/menu.sh -O /bin/menu > /dev/null 2>&1
 chmod +x /bin/menu
 clear && echo -e "      \033[1;33mDOWNLOAD: 53% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/mudardata.sh -O /bin/mudardata > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/mudardata.sh -O /bin/mudardata > /dev/null 2>&1
 chmod +x /bin/mudardata
 clear && echo -e "      \033[1;33mDOWNLOAD: 58% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/otimizar.sh -O /bin/otimizar > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/otimizar.sh -O /bin/otimizar > /dev/null 2>&1
 chmod +x /bin/otimizar
 clear && echo -e "      \033[1;33mDOWNLOAD: 62% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/reiniciarservicos.sh -O /bin/reiniciarservicos > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/reiniciarservicos.sh -O /bin/reiniciarservicos > /dev/null 2>&1
 chmod +x /bin/reiniciarservicos
 clear && echo -e "      \033[1;33mDOWNLOAD: 65% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/reiniciarsistema.sh -O /bin/reiniciarsistema > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/reiniciarsistema.sh -O /bin/reiniciarsistema > /dev/null 2>&1
 chmod +x /bin/reiniciarsistema
 clear && echo -e "      \033[1;33mDOWNLOAD: 69% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/remover.sh -O /bin/remover > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/remover.sh -O /bin/remover > /dev/null 2>&1
 chmod +x /bin/remover
 clear && echo -e "      \033[1;33mDOWNLOAD: 70% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/senharoot.sh -O /bin/senharoot > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/senharoot.sh -O /bin/senharoot > /dev/null 2>&1
 chmod +x /bin/senharoot
 clear && echo -e "      \033[1;33mDOWNLOAD: 71% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/speedtest.sh -O /bin/speedtest > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/speedtest.sh -O /bin/speedtest > /dev/null 2>&1
 chmod +x /bin/speedtest
 clear && echo -e "      \033[1;33mDOWNLOAD: 74% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/sshmonitor.sh -O /bin/sshmonitor > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/sshmonitor.sh -O /bin/sshmonitor > /dev/null 2>&1
 chmod +x /bin/sshmonitor
 dos2unix /bin/sshmonitor
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/uexpired.sh -O /bin/uexpired > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/uexpired.sh -O /bin/uexpired > /dev/null 2>&1
 chmod +x /bin/uexpired
 clear && echo -e "      \033[1;33mDOWNLOAD: 77% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/userbackup.sh -O /bin/userbackup > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/userbackup.sh -O /bin/userbackup > /dev/null 2>&1
 chmod +x /bin/userbackup
 clear && echo -e "      \033[1;33mDOWNLOAD: 78% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/verifbot.sh -O /bin/verifbot > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/verifbot.sh -O /bin/verifbot > /dev/null 2>&1
 chmod +x /bin/verifbot
 clear && echo -e "      \033[1;33mDOWNLOAD: 80% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/verifatt.sh -O /bin/verifatt > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/verifatt.sh -O /bin/verifatt > /dev/null 2>&1
 chmod +x /bin/verifatt
 clear && echo -e "      \033[1;33mDOWNLOAD: 82% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/cabecalho.sh -O /etc/CrashVPN/cabecalho > /dev/null 2>&1
-chmod +x /etc/CrashVPN/cabecalho
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/cabecalho.sh -O /etc/NetOn/cabecalho > /dev/null 2>&1
+chmod +x /etc/NetOn/cabecalho
 clear && echo -e "      \033[1;33mDOWNLOAD: 83% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/bot.sh -O /etc/CrashVPN/bot > /dev/null 2>&1
-chmod +x /etc/CrashVPN/bot
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/bot.sh -O /etc/NetOn/bot > /dev/null 2>&1
+chmod +x /etc/NetOn/bot
 clear && echo -e "      \033[1;33mDOWNLOAD: 84% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/proxy.py -O /etc/CrashVPN/proxy.py > /dev/null 2>&1
-chmod +x /etc/CrashVPN/proxy.py
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/proxy.py -O /etc/NetOn/proxy.py > /dev/null 2>&1
+chmod +x /etc/NetOn/proxy.py
 clear && echo -e "      \033[1;33mDOWNLOAD: 89% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/proxy.py -O /etc/CrashVPN/open.py > /dev/null 2>&1
-chmod +x /etc/CrashVPN/open.py
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/proxy.py -O /etc/NetOn/open.py > /dev/null 2>&1
+chmod +x /etc/NetOn/open.py
 clear && echo -e "      \033[1;33mDOWNLOAD: 90% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/antcrashvpn.sh -O /bin/antcrashvpn.sh > /dev/null 2>&1
-chmod +x /bin/antcrashvpn.sh
-dos2unix /bin/antcrashvpn.sh
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/antNetOn.sh -O /bin/antNetOn.sh > /dev/null 2>&1
+chmod +x /bin/antNetOn.sh
+dos2unix /bin/antNetOn.sh
 clear && echo -e "      \033[1;33mDOWNLOAD: 91% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/antcrashvpn2.sh -O /bin/antcrashvpn2.sh > /dev/null 2>&1
-chmod +x /bin/antcrashvpn2.sh
-dos2unix /bin/antcrashvpn2.sh
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/antcNetOn2.sh -O /bin/antNetOn2.sh > /dev/null 2>&1
+chmod +x /bin/antNetOn2.sh
+dos2unix /bin/antNetOn2.sh
 clear && echo -e "      \033[1;33mDOWNLOAD: 92% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/proxyopen.py -O /etc/CrashVPN/proxyopen.py > /dev/null 2>&1
-chmod +x /etc/CrashVPN/proxyopen.py
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/proxyopen.py -O /etc/NetOn/proxyopen.py > /dev/null 2>&1
+chmod +x /etc/NetOn/proxyopen.py
 clear && echo -e "      \033[1;33mDOWNLOAD: 93% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/ovpn18.sh -O /bin/ovpn18 > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/ovpn18.sh -O /bin/ovpn18 > /dev/null 2>&1
 chmod +x /bin/ovpn18
 dos2unix /bin/ovpn18
 clear && echo -e "      \033[1;33mDOWNLOAD: 94% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/antcrashvpn2.sh -O /bin/antcrashvpn3.sh > /dev/null 2>&1
-chmod +x /bin/antcrashvpn3.sh
-dos2unix /bin/antcrashvpn3.sh
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/antNetOn2.sh -O /bin/antNetOn3.sh > /dev/null 2>&1
+chmod +x /bin/antNetOn3.sh
+dos2unix /bin/antNetOn3.sh
 clear && echo -e "      \033[1;33mDOWNLOAD: 95% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/b2/open.py -O /etc/CrashVPN2/open.py > /dev/null 2>&1
-chmod +x /etc/CrashVPN2/open.py
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/b2/open.py -O /etc/NetOn2/open.py > /dev/null 2>&1
+chmod +x /etc/NetOn2/open.py
 clear && echo -e "      \033[1;33mDOWNLOAD: 96% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/b2/proxy.py -O /etc/CrashVPN2/proxy.py > /dev/null 2>&1
-chmod +x /etc/CrashVPN2/proxy.py
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/b2/proxy.py -O /etc/NetOn2/proxy.py > /dev/null 2>&1
+chmod +x /etc/NetOn2/proxy.py
 clear && echo -e "      \033[1;33mDOWNLOAD: 97% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/b2/sshpluconect -O /bin/sshpluconect > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/b2/sshpluconect -O /bin/sshpluconect > /dev/null 2>&1
 chmod +x /bin/sshpluconect
 clear && echo -e "      \033[1;33mDOWNLOAD: 98% \033[0m" && sleep 1
-wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/b2/instsqd -O /bin/instsqd > /dev/null 2>&1
+wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/b2/instsqd -O /bin/instsqd > /dev/null 2>&1
 chmod +x /bin/instsqd
 clear && echo -e "      \033[1;33mDOWNLOAD: 99% \033[0m" && sleep 1
 _dir1='/bin'
-_dir2='/etc/CrashVPN'
+_dir2='/etc/NetOn'
 _mdls=("addhost" "delhost" "alterarsenha" "criarusuario" "expcleaner" "mudardata" "remover" "criarteste" "verifbot" "droplimiter" "alterarlimite" "ajuda" "sshmonitor" "badvpn" "userbackup" "blockt" "otimizar" "menu" "speedtest" "banner" "senharoot" "reiniciarservicos" "reiniciarsistema" "attscript" "conexao" "delscript" "detalhes" "botssh" "infousers" "verifatt" "limiter" "uexpired" "cabecalho" "bot" "open.py" "proxy.py")
 _arq_host="/etc/hosts"
 _host[0]="d1n212ccp6ldpw.cloudfront.net"
@@ -205,7 +205,7 @@ _host[2]="portalrecarga.vivo.com.br/recarga"
 _host[3]="navegue.vivo.com.br/controle/"
 _host[4]="navegue.vivo.com.br/pre/"
 _host[5]="www.whatsapp.net"
-_host[6]="/CrashVPN?"
+_host[6]="/NetOn?"
 clear && echo -e "      \033[1;33mDOWNLOAD: 100% \033[0m" && sleep 1
 for host in ${_host[@]}; do
 	if [[ "$(grep -w "$host" $_arq_host | wc -l)" = "0" ]]; then
@@ -218,7 +218,7 @@ clear
 #INICIO AUTOMATICO' >/etc/autostart
 	chmod +x /etc/autostart
 } || {
-	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/ShellBot.sh -O /etc/CrashVPN/ShellBot.sh
+	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/ShellBot.sh -O /etc/NetOn/ShellBot.sh
 	for proc in $(ps x | grep 'dmS' | grep -v 'grep' | awk {'print $1'}); do
 		screen -r -S "$proc" -X quit
 	done
@@ -236,7 +236,7 @@ crontab -r >/dev/null 2>&1
 	echo "* * * * * /etc/autostart"
 	echo "0 */6 * * * /bin/uexpired"
 ) | crontab -
-echo "$_lvk" | sed -n '1 p' | cut -d' ' -f2 >/bin/versao && cat /bin/versao >/home/CrashVPN
+echo "$_lvk" | sed -n '1 p' | cut -d' ' -f2 >/bin/versao && cat /bin/versao >/home/NetOn
 wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 >/dev/null 2>&1
 chmod +x jq-linux64 && mv jq-linux64 $(which jq)
 service cron restart >/dev/null 2>&1
