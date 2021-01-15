@@ -1,11 +1,11 @@
 #!/bin/bash
 #===================================================
-#	SCRIPT: BOT CrashVPN MANAGER
+#	SCRIPT: ROBÔ NetOn MANAGER
 #   DATA ATT:   15 de Jul 2020
-#	DESENVOLVIDO POR:	Openers Family_VPN
+#	Modificado POR:	@RmVps
 #   API SHELLBOT:   SHAMAN
-#	CONTATO TELEGRAM:	http://t.me/Openers Family_vpn
-#	CANAL TELEGRAM:	http://t.me/CrashVPN
+#	CONTATO TELEGRAM:	http://t.me/RmVps
+#	CANAL TELEGRAM:	http://t.me/EquipeNetOn
 #===================================================
 [[ ! -d /etc/CrashVPN ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
@@ -23,7 +23,7 @@ fun_menu() {
     if [[ "${message_from_id[$id]}" = "$id_admin" ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>SEJA BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>SEJA BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
@@ -37,7 +37,7 @@ fun_menu() {
     elif [[ "$(grep -w "${message_from_username}" $ativos | awk '{print $NF}')" == 'revenda' ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>SEJA BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>SEJA BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
@@ -47,7 +47,7 @@ fun_menu() {
     elif [[ "$(grep -w "${message_from_username}" $ativos | awk '{print $NF}')" == 'subrevenda' ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>SEJA BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>SEJA BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
@@ -72,7 +72,7 @@ fun_ajuda() {
     if [[ "$id_chatuser" = "$id_admin" ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Exibe menu\n"
@@ -107,7 +107,7 @@ fun_ajuda() {
     elif [[ "$(grep -w "$id_name" $ativos | awk '{print $NF}')" == 'revenda' ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Exibe menu\n"
@@ -132,7 +132,7 @@ fun_ajuda() {
     elif [[ "$(grep -w "$id_name" $ativos | awk '{print $NF}')" == 'subrevenda' ]]; then
         local env_msg
         env_msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        env_msg+="<b>BEM VINDO(a) AO BOT CrashVPN</b>\n"
+        env_msg+="<b>BEM VINDO(a) AO ROBÔ NetOn</b>\n"
         env_msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Exibe menu\n"
@@ -921,10 +921,10 @@ backup_users() {
 sobremim() {
     local msg
     msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-    msg+="<b>🤖 BOT CrashVPN MANAGER 🤖</b>\n"
+    msg+="<b>🤖 ROBÔ NetOn MANAGER 🤖</b>\n"
     msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
-    msg+="<b>Desenvolvido por:</b> @openersfamily\n"
-    msg+="<b>Canal Oficial:</b> @CrashVPN\n\n"
+    msg+="<b>Modificado por:</b> @RmVps\n"
+    msg+="<b>Canal Oficial:</b> @EquipeNetOn\n\n"
     msg+="Fui criado com o propósito de fornecer informações e ferramentas para gestão VPN em servidores 🐧 GNU/Linux 🐧.\n\n"
     msg+="<b>Menu:</b> /menu\n"
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
