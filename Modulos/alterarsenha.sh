@@ -55,7 +55,7 @@ else
 				pkill -f $user
 				echo "$user:$password" | chpasswd
 				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "A senha do usuário $user foi alterada para: $password" ; echo "" ; tput sgr0
-				echo "$password" > /etc/CrashVPN/senha/$user
+				echo "$password" > /etc/NetOn/senha/$user
 				exit 1
 			fi
 		fi
