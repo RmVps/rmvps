@@ -141,6 +141,6 @@ backbot=$1
 } || {
 	rm /root/backup.vps 1>/dev/null 2>/dev/null
 	tar cvf /root/backup.vps /root/usuarios.db /etc/shadow /etc/passwd /etc/group /etc/gshadow /etc/bot 1>/dev/null 2>/dev/null
-	[[ -d "/etc/CrashVPN/backups" ]] && mv /root/backup.vps /etc/CrashVPN/backups/backup.vps
+	[[ -d "/etc/NetOn/backups" ]] && mv /root/backup.vps /etc/NetOn/backups/backup.vps
 	exit
 }
