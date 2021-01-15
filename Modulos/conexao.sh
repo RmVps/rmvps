@@ -18,7 +18,7 @@
 		comando[1]="$2"
 		(
 			[[ -e $HOME/fim ]] && rm $HOME/fim
-			[[ ! -d /etc/CrashVPN ]] && rm -rf /bin/menu
+			[[ ! -d /etc/NetOn ]] && rm -rf /bin/menu
 			${comando[0]} >/dev/null 2>&1
 			${comando[1]} >/dev/null 2>&1
 			touch $HOME/fim
@@ -135,7 +135,7 @@
 			echo "acl url1 dstdomain -i 127.0.0.1
 acl url2 dstdomain -i localhost
 acl url3 dstdomain -i $ipdovps
-acl url4 dstdomain -i /CrashVPN?
+acl url4 dstdomain -i /NetOn?
 acl payload url_regex -i "$var_pay"
 acl all src 0.0.0.0/0
 
@@ -507,8 +507,8 @@ pipeline_prefetch off" >>$var_sqd
 				rm -rf stunnel.conf
 				rm -rf cert.cert
 				rm -rf key.key
-				wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/stunnelcerts/cert
-				wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/stunnelcerts/stunnel
+				wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/stunnelcerts/cert
+				wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/stunnelcerts/stunnel
 				mv cert cert.pem
 				mv stunnel stunnel.conf
 				chmod 777 cert.pem
@@ -585,8 +585,8 @@ pipeline_prefetch off" >>$var_sqd
 				cd /etc/stunnel/
 				rm -rf stunnel.conf
 				rm -rf stunnel.pem
-				wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/stunnelcerts/cert
-				wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/stunnelcerts/stunnel
+				wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/stunnelcerts/cert
+				wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/stunnelcerts/stunnel
 				mv cert cert.pem
 				mv stunnel stunnel.conf
 				chmod 777 cert.pem
@@ -1099,7 +1099,7 @@ pipeline_prefetch off" >>$var_sqd
 				./easyrsa --batch build-ca nopass
 				./easyrsa gen-dh
 				./easyrsa build-server-full server nopass
-				./easyrsa build-client-full CrashVPN nopass
+				./easyrsa build-client-full NetOn nopass
 				./easyrsa gen-crl
 				cp pki/ca.crt pki/private/ca.key pki/dh.pem pki/issued/server.crt pki/private/server.key /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn
 				chown nobody:$GROUPNAME /etc/openvpn/crl.pem
@@ -1235,13 +1235,13 @@ exit 0' >$RCLOCAL
 				IP="$IP2"
 			fi
 			cat <<-EOF >/etc/openvpn/client-common.txt
-				# OVPN_ACCESS_SERVER_PROFILE=[CrashVPN]
+				# OVPN_ACCESS_SERVER_PROFILE=[NetOn]
 				client
 				dev tun
 				proto $PROTOCOL
 				sndbuf 0
 				rcvbuf 0
-				remote /CrashVPN? $porta
+				remote /NetOn? $porta
 				#payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf]CONNECT HTTP/1.0[crlf][crlf]|[crlf]"
 				http-proxy $IP 8080
 				resolv-retry 5
@@ -1259,7 +1259,7 @@ exit 0' >$RCLOCAL
 				float
 			EOF
 			# gerar client.ovpn
-			newclient "CrashVPN"
+			newclient "NetOn"
 			[[ "$(netstat -nplt | grep -wc 'openvpn')" != '0' ]] && echo -e "\n\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m" || echo -e "\n\033[1;31mERRO ! A INSTALACAO CORROMPEU\033[0m"
 		}
 		sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
@@ -1294,7 +1294,7 @@ exit 0' >$RCLOCAL
 		echo -ne "\033[1;32mOQUE DESEJA FAZER \033[1;33m?\033[1;37m "
 		read resposta
 		if [[ "$resposta" = '1' ]]; then
-			if ps x | grep -w antcrashvpn2.sh | grep -v grep 1>/dev/null 2>/dev/null; then
+			if ps x | grep -w antNetOn2.sh | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				echo -e "\E[41;1;37m             PROXY SOCKS              \E[0m"
 				echo ""
@@ -1302,8 +1302,8 @@ exit 0' >$RCLOCAL
 					for pidproxy in $(screen -ls | grep ".proxy" | awk {'print $1'}); do
 						screen -X -S "$pidproxy" kill
 					done
-					[[ $(grep -wc "antcrashvpn2.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn2.sh/d' /etc/autostart
+					[[ $(grep -wc "antNetOn2.sh" /etc/autostart) != '0' ]] && {
+						sed -i '/antNetOn2.sh/d' /etc/autostart
 					}
 					sleep 1
 					screen -wipe >/dev/null
@@ -1331,12 +1331,12 @@ exit 0' >$RCLOCAL
 				verif_ptrs $porta
 				fun_inisocks() {
 					sleep 1
-					screen -dmS proxy antcrashvpn2.sh "$porta"
-					[[ $(grep -wc "antcrashvpn2.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antcrashvpn2.sh $porta" >>/etc/autostart
+					screen -dmS proxy antNetOn2.sh "$porta"
+					[[ $(grep -wc "antNetOn2.sh" /etc/autostart) = '0' ]] && {
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antNetOn2.sh $porta" >>/etc/autostart
 					} || {
-						sed -i '/antcrashvpn2.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antcrashvpn2.sh $porta" >>/etc/autostart
+						sed -i '/antNetOn2.sh/d' /etc/autostart
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy antNetOn2.sh $porta" >>/etc/autostart
 					}
 				}
 				echo ""
@@ -1349,7 +1349,7 @@ exit 0' >$RCLOCAL
 				fun_socks
 			fi
 		elif [[ "$resposta" = '2' ]]; then
-			if ps x | grep -w antcrashvpn3.sh | grep -v grep 1>/dev/null 2>/dev/null; then
+			if ps x | grep -w antNetOn3.sh | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
 				echo -e "\E[41;1;37m            SOCKS OPENVPN + ANTCRASH             \E[0m"
 				echo ""
@@ -1357,8 +1357,8 @@ exit 0' >$RCLOCAL
 					for pidproxy in $(screen -list | grep -w "proxy2" | awk {'print $1'}); do
 						screen -r -S "$pidproxy" -X quit
 					done
-					[[ $(grep -wc "antcrashvpn3.sh" /etc/autostart) != '0' ]] && {
-						sed -i '/antcrashvpn3.sh/d' /etc/autostart
+					[[ $(grep -wc "antNetOn3.sh" /etc/autostart) != '0' ]] && {
+						sed -i '/antNetOn3.sh/d' /etc/autostart
 					}
 					sleep 1
 					screen -wipe >/dev/null
@@ -1385,12 +1385,12 @@ exit 0' >$RCLOCAL
 				}
 				verif_ptrs $porta
 				fun_inisocksop() {
-					screen -dmS proxy2 antcrashvpn3.sh "$porta"
-					[[ $(grep -wc "antcrashvpn3.sh" /etc/autostart) = '0' ]] && {
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antcrashvpn3.sh $porta" >>/etc/autostart
+					screen -dmS proxy2 antNetOn3.sh "$porta"
+					[[ $(grep -wc "antNetOn3.sh" /etc/autostart) = '0' ]] && {
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antNetOn3.sh $porta" >>/etc/autostart
 					} || {
-						sed -i '/antcrashvpn3.sh/d' /etc/autostart
-						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antcrashvpn3.sh $porta" >>/etc/autostart
+						sed -i '/antNetOn3.sh/d' /etc/autostart
+						echo -e "netstat -tlpn | grep -w $porta > /dev/null || screen -dmS proxy2 antNetOn3.sh $porta" >>/etc/autostart
 					}
 				}
 				echo ""
@@ -1425,7 +1425,7 @@ exit 0' >$RCLOCAL
 				echo ""
 				abrirptsks() {
 					sleep 1
-					screen -dmS proxy /etc/antcrashvpn2.sh &porta
+					screen -dmS proxy /etc/antNetOn2.sh &porta
 					sleep 1
 				}
 				fun_bar 'abrirptsks'
@@ -1442,7 +1442,7 @@ exit 0' >$RCLOCAL
 		elif [[ "$resposta" = '478' ]]; then
 			if ps x | grep -w proxy.py | grep -v grep 1>/dev/null 2>/dev/null; then
 				clear
-				msgsocks=$(cat /etc/CrashVPN/proxy.py | grep -E "MSG =" | awk -F = '{print $2}' | cut -d "'" -f 2)
+				msgsocks=$(cat /etc/NetOn/proxy.py | grep -E "MSG =" | awk -F = '{print $2}' | cut -d "'" -f 2)
 				echo -e "\E[44;1;37m             PROXY SOCKS              \E[0m"
 				echo ""
 				echo -e "\033[1;33mSTATUS: \033[1;32m$msgsocks"
@@ -1497,11 +1497,11 @@ exit 0' >$RCLOCAL
 					cor_sts='null'
 				fi
 				fun_msgsocks() {
-					msgsocks2=$(cat /etc/CrashVPN/proxy.py | grep "MSG =" | awk -F = '{print $2}')
-					sed -i "s/$msgsocks2/ '$msgg'/g" /etc/CrashVPN/proxy.py
+					msgsocks2=$(cat /etc/NetOn/proxy.py | grep "MSG =" | awk -F = '{print $2}')
+					sed -i "s/$msgsocks2/ '$msgg'/g" /etc/NetOn/proxy.py
 					sleep 1
-					cor_old=$(grep 'color=' /etc/CrashVPN/proxy.py | cut -d '"' -f2)
-					sed -i "s/\b$cor_old\b/$cor_sts/g" /etc/CrashVPN/proxy.py
+					cor_old=$(grep 'color=' /etc/NetOn/proxy.py | cut -d '"' -f2)
+					sed -i "s/\b$cor_old\b/$cor_sts/g" /etc/NetOn/proxy.py
 
 				}
 				echo ""
@@ -1517,7 +1517,7 @@ exit 0' >$RCLOCAL
 						screen -wipe >/dev/null
 						_Ptsks="$(cat /tmp/Pt_sks)"
 						sleep 1
-						screen -dmS proxy /etc/antcrashvpn2.sh  $_Ptsks
+						screen -dmS proxy /etc/antNetOn2.sh  $_Ptsks
 						rm /tmp/Pt_sks
 					fi
 				}
@@ -1673,7 +1673,7 @@ exit 0' >$RCLOCAL
 	x="ok"
 	fun_conexao() {
 		while true $x != "ok"; do
-			[[ ! -e '/home/CrashVPN' ]] && exit 0
+			[[ ! -e '/home/NetOn' ]] && exit 0
 			clear
 			echo -e "\E[44;1;37m                MODO DE CONEXAO                 \E[0m\n"
 			echo -e "\033[1;32mSERVICO: \033[1;33mOPENSSH \033[1;32mPORTA: \033[1;37m$(grep 'Port' /etc/ssh/sshd_config | cut -d' ' -f2 | grep -v 'no' | xargs)" && sts6="\033[1;32m◉ "
