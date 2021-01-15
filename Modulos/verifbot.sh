@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ ! -d /etc/CrashVPN ]] && exit 0
+[[ ! -d /etc/NetOn ]] && exit 0
 [[ ! -d /etc/bot/revenda ]] && exit 0
 for arq in $(ls /etc/bot/revenda); do
     _diasR=$(grep 'Dias' /etc/bot/revenda/$arq/$arq| awk '{print $NF}')
