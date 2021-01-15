@@ -62,7 +62,7 @@ fun_atts () {
 
   [[ -e /tmp/att ]] && rm /tmp/att
 
-	wget -c -P /home http://sv.bigbolgames.com:8444/files/superuser/crashvpn/versao
+	wget -c -P /home http://sv.bigbolgames.com:8444/files/superuser/NetOn/versao
 
 	[[ -f "/home/versao" ]] && mv /home/versao /tmp/att
 
@@ -72,7 +72,7 @@ fun_atts () {
 
 echo -e "                              \033[1;31mBy Openers Family\033[1;36m"
 
-echo -e "   CrashVPN" | figlet
+echo -e "   NetOn" | figlet
 
 echo " "
 
@@ -132,11 +132,11 @@ vrs2=$(sed -n '1 p' /tmp/att | sed -e 's/[^0-9]//ig')
 
     sleep 3
 
-    wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/crashvpn > /dev/null 2>&1
+    wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/NetOn > /dev/null 2>&1
 
-    chmod +x crashvpn
+    chmod +x NetOn
 
-    ./crashvpn
+    ./NetOn
 
     clear
 
