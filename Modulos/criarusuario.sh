@@ -1,9 +1,9 @@
 #!/bin/bash
 #====================================================
-#	SCRIPT: CRIARUSUARIO CrashVPN MANAGER
-#	DESENVOLVIDO POR:	Openers Family_VPN
-#	CONTATO TELEGRAM:	http://t.me/Openers Family_vpn
-#	CANAL TELEGRAM:	http://t.me/CrashVPN
+#	SCRIPT: NetOn MANAGER
+#	Modificado POR:	RmVps
+#	CONTATO TELEGRAM:	http://t.me/RmVps
+#	CANAL TELEGRAM:	http://t.me/EquipeNetOn
 #====================================================
 IP=$(cat /etc/IP)
 cor1='\033[41;1;37m'
