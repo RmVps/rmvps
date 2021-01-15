@@ -7,7 +7,7 @@
 #	CONTATO TELEGRAM:	http://t.me/RmVps
 #	CANAL TELEGRAM:	http://t.me/EquipeNetOn
 #===================================================
-[[ ! -d /etc/CrashVPN ]] && exit 0
+[[ ! -d /etc/NetOn ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
 source ShellBot.sh
 api_bot=$1
@@ -219,7 +219,7 @@ criar_user() {
         echo "$usuario:$senha:$info_data:$limite" >/etc/bot/info-users/$usuario
     }
     echo "$usuario $limite" >>/root/usuarios.db
-    echo "$senha" >/etc/CrashVPN/senha/$usuario
+    echo "$senha" >/etc/NetOn/senha/$usuario
     [[ -e "/etc/openvpn/server.conf" ]] && {
         cd /etc/openvpn/easy-rsa/
         ./easyrsa build-client-full $usuario nopass
@@ -252,7 +252,7 @@ fun_del_user() {
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db >/tmp/ph
         cat /tmp/ph >/root/usuarios.db
-        rm /etc/CrashVPN/senha/$usuario >/dev/null 2>&1
+        rm /etc/NetOn/senha/$usuario >/dev/null 2>&1
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -266,11 +266,11 @@ fun_del_user() {
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db >/tmp/ph
         cat /tmp/ph >/root/usuarios.db
-        rm /etc/CrashVPN/senha/$usuario >/dev/null 2>&1
+        rm /etc/NetOn/senha/$usuario >/dev/null 2>&1
         rm /etc/bot/revenda/${message_from_username}/usuarios/$usuario
         rm /etc/bot/info-users/$usuario
     }
-    [[ -e /etc/CrashVPN/userteste/$usuario.sh ]] && rm /etc/CrashVPN/userteste/$usuario.sh
+    [[ -e /etc/NetOn/userteste/$usuario.sh ]] && rm /etc/NetOn/userteste/$usuario.sh
     [[ -e "/etc/openvpn/easy-rsa/pki/private/$usuario.key" ]] && {
         [[ -e /etc/debian_version ]] && GROUPNAME=nogroup
         cd /etc/openvpn/easy-rsa/
@@ -308,7 +308,7 @@ alterar_senha_user() {
     senha=$2
     [[ "${message_from_id[$id]}" = "$id_admin" ]] && {
         echo "$usuario:$senha" | chpasswd
-        echo "$senha" >/etc/CrashVPN/senha/$usuario
+        echo "$senha" >/etc/NetOn/senha/$usuario
         pkill -u $usuario >/dev/null 2>&1
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
@@ -322,7 +322,7 @@ alterar_senha_user() {
         senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario | awk -F : {'print $2'})
         sed -i "/$usuario/ s/\b$senha2\b/$senha/g" /etc/bot/revenda/${message_from_username}/usuarios/$usuario
         sed -i "/$usuario/ s/\b$senha2\b/$senha/g" /etc/bot/info-users/$usuario
-        echo "$senha" >/etc/CrashVPN/senha/$usuario
+        echo "$senha" >/etc/NetOn/senha/$usuario
         pkill -u $usuario >/dev/null 2>&1
     }
 }
@@ -455,7 +455,7 @@ ver_users() {
             local info
             for user in $(cat /etc/passwd | awk -F : '$3 >= 1000 {print $1}' | grep -v nobody); do
                 info='===========================\n'
-                [[ -e /etc/CrashVPN/senha/$user ]] && senha=$(cat /etc/CrashVPN/senha/$user) || senha='Null'
+                [[ -e /etc/NetOn/senha/$user ]] && senha=$(cat /etc/NetOn/senha/$user) || senha='Null'
                 [[ $(grep -wc $user $HOME/usuarios.db) != '0' ]] && limite=$(grep -w $user $HOME/usuarios.db | cut -d' ' -f2) || limite='Null'
                 datauser=$(chage -l $user | grep -i co | awk -F : '{print $2}')
                 [[ $datauser = ' never' ]] && {
@@ -507,7 +507,7 @@ ver_users() {
             local info
             for user in $(ls /etc/bot/revenda/${callback_query_from_username}/usuarios); do
                 info='===========================\n'
-                [[ -e /etc/CrashVPN/senha/$user ]] && senha=$(cat /etc/CrashVPN/senha/$user) || senha='Null'
+                [[ -e /etc/NetOn/senha/$user ]] && senha=$(cat /etc/NetOn/senha/$user) || senha='Null'
                 [[ $(grep -wc $user $HOME/usuarios.db) != '0' ]] && limite=$(grep -w $user $HOME/usuarios.db | cut -d' ' -f2) || limite='Null'
                 datauser=$(chage -l $user | grep -i co | awk -F : '{print $2}')
                 [[ $datauser = ' never' ]] && {
@@ -981,24 +981,24 @@ fun_teste() {
         echo "$senha"
         echo "$senha"
     ) | passwd $usuario >/dev/null 2>&1
-    echo "$senha" >/etc/CrashVPN/senha/$usuario
+    echo "$senha" >/etc/NetOn/senha/$usuario
     echo "$usuario $limite" >>/root/usuarios.db
     [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
         echo "$usuario:$senha:$ex_date:$limite" >/etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
     dir_teste="/etc/bot/revenda/${message_from_username}/usuarios/$usuario"
-    cat <<-EOF >/etc/CrashVPN/userteste/$usuario.sh
+    cat <<-EOF >/etc/NetOn/userteste/$usuario.sh
 	#!/bin/bash
 	# USUARIO TESTE
 	[[ \$(ps -u "$usuario" | grep -c sshd) != '0' ]] && pkill -u $usuario
 	userdel --force $usuario
 	grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
 	[[ -e $dir_teste ]] && rm $dir_teste
-	rm /etc/CrashVPN/senha/$usuario > /dev/null 2>&1
-	rm /etc/CrashVPN/userteste/$usuario.sh
+	rm /etc/NetOn/senha/$usuario > /dev/null 2>&1
+	rm /etc/NetOn/userteste/$usuario.sh
 	EOF
-    chmod +x /etc/CrashVPN/userteste/$usuario.sh
-    echo "/etc/CrashVPN/userteste/$usuario.sh" | at now + $t_time hour >/dev/null 2>&1
+    chmod +x /etc/NetOn/userteste/$usuario.sh
+    echo "/etc/NetOn/userteste/$usuario.sh" | at now + $t_time hour >/dev/null 2>&1
     [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
     [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
         for arqv in $(ls /etc/bot/arquivos); do
@@ -1036,7 +1036,7 @@ fun_exp_user() {
             grep -v ^$user[[:space:]] /root/usuarios.db >/tmp/ph
             cat /tmp/ph >/root/usuarios.db
             [[ -e /etc/bot/info-users/$user ]] && rm /etc/bot/info-users/$user
-            [[ -e /etc/CrashVPN/userteste/$user.sh ]] && rm /etc/CrashVPN/userteste/$user.sh
+            [[ -e /etc/NetOn/userteste/$user.sh ]] && rm /etc/NetOn/userteste/$user.sh
             [[ "$(ls /etc/bot/revenda)" != '0' ]] && {
                 for ex in $(ls /etc/bot/revenda); do
                     [[ -e /etc/bot/revenda/$exp/usuarios/$user ]] && rm /etc/bot/revenda/$ex/usuarios/$user
@@ -1070,7 +1070,7 @@ fun_exp_user() {
             userdel --force $user
             grep -v ^$user[[:space:]] /root/usuarios.db >/tmp/ph
             cat /tmp/ph >/root/usuarios.db
-            [[ -e /etc/CrashVPN/userteste/$user.sh ]] && rm /etc/CrashVPN/userteste/$user.sh
+            [[ -e /etc/NetOn/userteste/$user.sh ]] && rm /etc/NetOn/userteste/$user.sh
             [[ -e "$dir_user/$user" ]] && rm $dir_user/$user
         done
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1226,8 +1226,8 @@ relatorio_rev() {
 
 fun_backauto() {
     [[ "${callback_query_from_id[$id]}" = "$id_admin" ]] && {
-        [[ ! -d /etc/CrashVPN/backups ]] && {
-            mkdir /etc/CrashVPN/backups
+        [[ ! -d /etc/NetOn/backups ]] && {
+            mkdir /etc/NetOn/backups
             [[ $(crontab -l | grep -c "userbackup") = '0' ]] && (
                 crontab -l 2>/dev/null
                 echo "0 */6 * * * /bin/userbackup 1"
@@ -1238,7 +1238,7 @@ fun_backauto() {
             return 0
         } || {
             [[ $(crontab -l | grep -c "userbackup") != '0' ]] && crontab -l | grep -v 'userbackup' | crontab -
-            [[ -d /etc/CrashVPN/backups ]] && rm -rf /etc/CrashVPN/backups
+            [[ -d /etc/NetOn/backups ]] && rm -rf /etc/NetOn/backups
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
                 --text "♻️ BACKUP AUTOMATICO DESATIVADO 🔴"
             return 0
@@ -1248,9 +1248,9 @@ fun_backauto() {
 
 backup_auto() {
     ShellBot.sendDocument --chat_id $id_admin \
-        --document "@/etc/CrashVPN/backups/backup.vps" \
+        --document "@/etc/NetOn/backups/backup.vps" \
         --caption "$(echo -e "♻️ BACKUP AUTOMATICO ♻️")"
-    rm /etc/CrashVPN/backups/backup.vps
+    rm /etc/NetOn/backups/backup.vps
     return 0
 }
 
@@ -1837,7 +1837,7 @@ unset keyboard4
 keyboard4="$(ShellBot.InlineKeyboardMarkup -b 'menu4')"
 
 while :; do
-    [[ -e "/etc/CrashVPN/backups/backup.vps" ]] && {
+    [[ -e "/etc/NetOn/backups/backup.vps" ]] && {
         backup_auto
     }
     #Obtem as atualizações
