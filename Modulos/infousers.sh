@@ -10,8 +10,8 @@ if [[ $(grep -cw $users $HOME/usuarios.db) == "1" ]]; then
 else
     lim="1"
 fi
-if [[ -e "/etc/CrashVPN/senha/$users" ]]; then
-    senha=$(cat /etc/CrashVPN/senha/$users)
+if [[ -e "/etc/NetOn/senha/$users" ]]; then
+    senha=$(cat /etc/NetOn/senha/$users)
 else
     senha="Null"
 fi
@@ -40,7 +40,7 @@ done
 echo ""
 _tuser=$(awk -F: '$3>=1000 {print $1}' /etc/passwd | grep -v nobody | wc -l)
 _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/CrashVPN/Exp)" != "" ]] && _expuser=$(cat /etc/CrashVPN/Exp) || _expuser="0"
+[[ "$(cat /etc/NetOn/Exp)" != "" ]] && _expuser=$(cat /etc/NetOn/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))
