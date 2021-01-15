@@ -37,6 +37,6 @@ for user in $(awk -F: '{print $1}' /etc/passwd); do
 		remove_ovp $user
 	fi
 done
-echo '0' > /etc/CrashVPN/Exp
+echo '0' > /etc/NetOn/Exp
 tput sgr0 
 echo ""
