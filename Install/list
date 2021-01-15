@@ -7,7 +7,7 @@ echo -e "      \033[1;33m INICIANDO DOWNLOAD \033[0m" && sleep 2
 #	CONTATO TELEGRAM:	http://t.me/RmVps
 #	CANAL TELEGRAM:	http://t.me/EquipeNetOn
 #====================================================
-_lvk=$(wget -qO- http://sv.bigbolgames.com:8444/files/superuser/crashvpn/versao)
+_lvk=$(wget -qO- http://sv.bigbolgames.com:8444/files/superuser/NetOn/versao)
 IP=$(wget -qO- ipv4.icanhazip.com)
 IP2=$(wget -qO- http://whatismyip.akamai.com/)
 [[ "$IP" != "$IP2" ]] && ipdovps="$IP2" || ipdovps="$IP"
