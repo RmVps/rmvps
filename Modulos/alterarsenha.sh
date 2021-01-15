@@ -10,8 +10,8 @@ while read _user; do
 	i=$(expr $i + 1)
 	_oP=$i
 	[[ $i == [1-9] ]] && i=0$i && oP+=" 0$i"
-	if [[ -e "/etc/CrashVPN/senha/$_user" ]]; then
-		_senha="$(cat /etc/CrashVPN/senha/$_user)"
+	if [[ -e "/etc/NetOn/senha/$_user" ]]; then
+		_senha="$(cat /etc/NetOn/senha/$_user)"
 	else
 		_senha='Null'
 	fi
@@ -47,7 +47,7 @@ else
 			then
 				echo "$user:$password" | chpasswd
 				tput setaf 7 ; tput setab 1 ; tput bold ; echo "" ; echo "A senha do usuário $user foi alterada para: $password" ; echo "" ; tput sgr0
-				echo "$password" > /etc/CrashVPN/senha/$user
+				echo "$password" > /etc/NetOn/senha/$user
 				exit 1
 			else
 				echo ""
