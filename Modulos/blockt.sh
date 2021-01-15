@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 IP=$(wget -qO- ipv4.icanhazip.com)
-arq="/etc/crashvpn-torrent"
+arq="/etc/NetOn-torrent"
 echo -e "\E[44;1;37m           FIREWALL BLOQUEIO TORRENT           \E[0m"
 echo ""
 if [[ -e "$arq" ]]; then
@@ -136,7 +136,7 @@ iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
 iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP' >> $arq
 sleep 2
 chmod +x $arq
-/etc/crashvpn-torrent > /dev/null
+/etc/NetOn-torrent > /dev/null
 }
 fun_spn2 () {
 	helice () {
