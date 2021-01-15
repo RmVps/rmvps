@@ -1,5 +1,5 @@
 #!/bin/bash
-[[ ! -d /etc/CrashVPN ]] && exit 0
+[[ ! -d /etc/NetOn ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
 source ShellBot.sh
 api_bot=$1
@@ -209,7 +209,7 @@ ver_users ()
                     limite=$(cat /etc/bot/info-users/$user|awk -F : {'print $4'})
                     info+="$user - $senha - $limite - $data"
                 else
-                    [[ -e /etc/CrashVPN/senha/$user ]] && senha2=$(cat /etc/CrashVPN/senha/$user) || senha2=null
+                    [[ -e /etc/NetOn/senha/$user ]] && senha2=$(cat /etc/NetOn/senha/$user) || senha2=null
                     [[ $(grep -wc "$user" $HOME/usuarios.db) != '0' ]] && limite2=$(grep -wi $user $HOME/usuarios.db |cut -d' ' -f2) || limite2='null'
                     info+="$user - $senha2 - $limite2 - null"
                 fi
@@ -247,7 +247,7 @@ ver_users ()
                     limite=$(cat /etc/bot/revenda/$cliente/usuarios/$user|awk -F : {'print $4'})
                     info+="$user - $senha - $limite - $data"
                 else
-                    [[ -e /etc/CrashVPN/senha/$user ]] && senha2=$(cat /etc/CrashVPN/senha/$user) || senha2=null
+                    [[ -e /etc/NetOn/senha/$user ]] && senha2=$(cat /etc/NetOn/senha/$user) || senha2=null
                     [[ $(grep -wc "$user" $HOME/usuarios.db) != '0' ]] && limite2=$(grep -wi $user $HOME/usuarios.db |cut -d' ' -f2) || limite2='null'
                     info+="$user - $senha2 - $limite2 - null"
                 fi
@@ -546,9 +546,9 @@ backup_users ()
 backup_auto ()
 {
     ShellBot.sendDocument --chat_id ${id_admin} \
-    --document "@/etc/CrashVPN/backups/backup.vps" \
+    --document "@/etc/NetOn/backups/backup.vps" \
     --caption "$(echo -e "♻️ BACKUP AUTOMATICO ♻️")"
-    rm /etc/CrashVPN/backups/backup.vps
+    rm /etc/NetOn/backups/backup.vps
     return 0
 }
 
@@ -699,7 +699,7 @@ fun_del_user () {
         kill -9 $piduser > /dev/null 2>&1
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-        rm /etc/CrashVPN/senha/$usuario > /dev/null 2>&1
+        rm /etc/NetOn/senha/$usuario > /dev/null 2>&1
         rm /etc/bot/info-users/$usuario
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
@@ -712,10 +712,10 @@ fun_del_user () {
         kill -9 $piduser > /dev/null 2>&1
         userdel --force "$usuario" 2>/dev/null
         grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-        rm /etc/CrashVPN/senha/$usuario > /dev/null 2>&1
+        rm /etc/NetOn/senha/$usuario > /dev/null 2>&1
         rm /etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
-    [[ -e /etc/CrashVPN/userteste/$usuario.sh ]] && at -f /etc/CrashVPN/userteste/$usuario.sh now + 1 min > /dev/null 2>&1
+    [[ -e /etc/NetOn/userteste/$usuario.sh ]] && at -f /etc/NetOn/userteste/$usuario.sh now + 1 min > /dev/null 2>&1
     [[ -e "/etc/openvpn/easy-rsa/pki/private/$usuario.key" ]] && {
         [[ -e /etc/debian_version ]] && GROUPNAME=nogroup
         cd /etc/openvpn/easy-rsa/
@@ -775,7 +775,7 @@ criar_user ()
         return 0
     fi
     echo "$usuario $limite" >> /root/usuarios.db
-    echo "$senha" > /etc/CrashVPN/senha/$usuario
+    echo "$senha" > /etc/NetOn/senha/$usuario
     [[ -e "/etc/openvpn/server.conf" ]] && {
         cd /etc/openvpn/easy-rsa/
         ./easyrsa build-client-full $usuario nopass
@@ -811,7 +811,7 @@ alterar_senha_user ()
     senha=$2
     [[ "${message_from_id[$id]}" = "$id_admin" ]] && {
         echo "$usuario:$senha" | chpasswd
-        [[ -e /etc/bot/info-users/$usuario ]]  && senha2=$(cat /etc/bot/info-users/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/CrashVPN/senha/$usuario)
+        [[ -e /etc/bot/info-users/$usuario ]]  && senha2=$(cat /etc/bot/info-users/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/NetOn/senha/$usuario)
         sed -i "s/\b$senha2\b/$senha/g" /etc/bot/info-users/$usuario
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
@@ -824,7 +824,7 @@ alterar_senha_user ()
         [[ -e /etc/bot/revenda/${message_from_username} ]]  && senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/CrashVPN/senha/$usuario)
         sed -i "s/\b$senha2\b/$senha/g" /etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
-    echo "$senha" > /etc/CrashVPN/senha/$usuario
+    echo "$senha" > /etc/NetOn/senha/$usuario
     pkill -f $usuario > /dev/null 2>&1
 }
 
@@ -1416,17 +1416,17 @@ fun_teste (){
     tuserdate=$(date '+%C%y/%m/%d' -d " +2 days")
     useradd -M -N -s /bin/false $usuario -e $tuserdate > /dev/null 2>&1
     (echo "$senha";echo "$senha") | passwd $usuario > /dev/null 2>&1
-    echo "$senha" > /etc/CrashVPN/senha/$usuario
+    echo "$senha" > /etc/NetOn/senha/$usuario
     echo "$usuario $limite" >> /root/usuarios.db
     echo "#!/bin/bash
 pkill -f "$usuario"
 userdel --force $usuario
 grep -v ^$usuario[[:space:]] /root/usuarios.db > /tmp/ph ; cat /tmp/ph > /root/usuarios.db
-rm /etc/CrashVPN/senha/$usuario > /dev/null 2>&1
+rm /etc/NetOn/senha/$usuario > /dev/null 2>&1
 rm $dir_teste
-rm -rf /etc/CrashVPN/userteste/$usuario.sh" > /etc/CrashVPN/userteste/$usuario.sh
-chmod +x /etc/CrashVPN/userteste/$usuario.sh
-at -f /etc/CrashVPN/userteste/$usuario.sh now + $t_time hour > /dev/null 2>&1
+rm -rf /etc/NetOn/userteste/$usuario.sh" > /etc/NetOn/userteste/$usuario.sh
+chmod +x /etc/NetOn/userteste/$usuario.sh
+at -f /etc/NetOn/userteste/$usuario.sh now + $t_time hour > /dev/null 2>&1
 
 [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
 if [[ "$(ls /etc/bot/arquivos| wc -l)" != '0' ]]; then
@@ -1519,14 +1519,14 @@ fun_backauto () {
         fi
         if [[ "$back_opc" = "ativar" ]]; then
             [[ $(crontab -l|grep -c "userbackup") = '0' ]] && (crontab -l 2>/dev/null; echo "0 */6 * * * /bin/userbackup 1") | crontab -
-            [[ ! -d /etc/CrashVPN/backups ]] && mkdir /etc/CrashVPN/backups
+            [[ ! -d /etc/NetOn/backups ]] && mkdir /etc/NetOn/backups
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "♻️ BACKUP AUTOMATICO ♻️\n\nATIVADO COM SUCESSO ✅")" \
             --parse_mode html
             return 0
         elif [[ "$back_opc" = "desativar" ]]; then
             [[ $(crontab -l|grep -c "userbackup") != '0' ]] && crontab -l | grep -v 'userbackup' | crontab -
-            [[ -d /etc/CrashVPN/backups ]] && rm -rf /etc/CrashVPN/backups
+            [[ -d /etc/NetOn/backups ]] && rm -rf /etc/NetOn/backups
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "♻️ BACKUP AUTOMATICO ♻️\n\nDESATIVADO COM SUCESSO ✅")" \
             --parse_mode html
@@ -1542,8 +1542,8 @@ fun_backauto () {
 
 while :
 do
-   [[ -d "/etc/CrashVPN/backups" ]] && {
-    [[ -e "/etc/CrashVPN/backups/backup.vps" ]] && {
+   [[ -d "/etc/NetOn/backups" ]] && {
+    [[ -e "/etc/NetOn/backups/backup.vps" ]] && {
         backup_auto
     }
    }
