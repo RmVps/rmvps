@@ -1,9 +1,9 @@
 #!/bin/bash
 #====================================================
-#	SCRIPT: CONEXAO CrashVPN MANAGER
-#	DESENVOLVIDO POR:	Openers Family_VPN
-#	CONTATO TELEGRAM:	http://t.me/Openers Family_vpn
-#	CANAL TELEGRAM:	http://t.me/CrashVPN
+#	SCRIPT: CONEXAO NetOn MANAGER
+#	Modificado POR:	RmVps
+#	CONTATO TELEGRAM:	http://t.me/RmVps
+#	CANAL TELEGRAM:	http://t.me/EquipeNetOn
 #
 #   MOD BY PENGUINEHIS
 #====================================================
