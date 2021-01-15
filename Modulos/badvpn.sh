@@ -32,12 +32,12 @@ fun_udp1 () {
     clear
     echo -e "\033[1;32mINICIANDO O BADVPN... \033[0m\n"
     fun_udpon () {
-        screen -dmS udpvpn /bin/antcrashvpn.sh
+        screen -dmS udpvpn /bin/antNetOn.sh
         [[ $(grep -wc "udpvpn" /etc/autostart) = '0' ]] && {
-		    echo -e "ps x | grep 'udpvpn' | grep -v 'grep' && echo 'ON' || screen -dmS udpvpn /bin/antcrashvpn.sh" >> /etc/autostart
+		    echo -e "ps x | grep 'udpvpn' | grep -v 'grep' && echo 'ON' || screen -dmS udpvpn /bin/antNetOn.sh" >> /etc/autostart
 		} || {
 		    sed -i '/udpvpn/d' /etc/autostart
-		    echo -e "ps x | grep 'udpvpn' | grep -v 'grep' && echo 'ON' || screen -dmS udpvpn /bin/antcrashvpn.sh" >> /etc/autostart
+		    echo -e "ps x | grep 'udpvpn' | grep -v 'grep' && echo 'ON' || screen -dmS udpvpn /bin/antNetOn.sh" >> /etc/autostart
 		}
         sleep 1
     }
@@ -52,16 +52,16 @@ fun_udp1 () {
 	        cd $HOME
 			apt-get install dos2unix -y
             wget https://www.dropbox.com/s/tgkxdwb03r7w59r/badvpn-udpgw -o /dev/null
-			wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/antcrashvpn.sh -o /dev/null
-			dos2unix antcrashvpn.sh
-			mv -f $HOME /antcrashvpn.sh /bin/antcrashvpn.sh
+			wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/antNetOn.sh -o /dev/null
+			dos2unix antNetOn.sh
+			mv -f $HOME /antNetOn.sh /bin/antNetOn.sh
             mv -f $HOME/badvpn-udpgw /bin/badvpn-udpgw
             chmod 777 /bin/badvpn-udpgw
 	   }
 	   fun_bar 'inst_udp'
 	   echo -e "\n\033[1;32mINICIANDO O BADVPN... \033[0m\n"
        fun_udpon2 () {
-           screen -dmS udpvpn /bin/antcrashvpn.sh
+           screen -dmS udpvpn /bin/antNetOn.sh
            [[ $(grep -wc "udpvpn" /etc/autostart) = '0' ]] && {
 		       echo -e "ps x | grep 'udpvpn' | grep -v 'grep' && echo 'ON' || screen -dmS udpvpn /bin/badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 --max-connections-for-client 10" >> /etc/autostart
 		   } || {
