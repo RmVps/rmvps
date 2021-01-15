@@ -39,17 +39,17 @@ fun_botOnOff() {
         clear
         echo -e "\033[1;32mINICIANDO ROBO NetOn \033[0m\n"
         fun_bot1() {
-            [[ ! -e "/etc/CrashVPN/ShellBot.sh" ]] && wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/ShellBot.sh -O /etc/CrashVPN/ShellBot.sh
-            cd /etc/CrashVPN
+            [[ ! -e "/etc/NetOn/ShellBot.sh" ]] && wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/ShellBot.sh -O /etc/NetOn/ShellBot.sh
+            cd /etc/NetOn
 			rm -R bot
-			wget http://sv.bigbolgames.com:8444/files/superuser/crashvpn/Modulos/bot
+			wget http://sv.bigbolgames.com:8444/files/superuser/NetOn/Modulos/bot
 			chmod 777 bot
             screen -dmS bot_plus ./bot $tokenbot $iduser >/dev/null 2>&1
             [[ $(grep -wc "bot_plus" /etc/autostart) = '0' ]] && {
-                echo -e "ps x | grep 'bot_plus' | grep -v 'grep' || cd /etc/CrashVPN && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >>/etc/autostart
+                echo -e "ps x | grep 'bot_plus' | grep -v 'grep' || cd /etc/NetOn && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >>/etc/autostart
             } || {
                 sed -i '/bot_plus/d' /etc/autostart
-                echo -e "ps x | grep 'bot_plus' | grep -v 'grep' || cd /etc/CrashVPN && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >>/etc/autostart
+                echo -e "ps x | grep 'bot_plus' | grep -v 'grep' || cd /etc/NetOn && sudo screen -dmS bot_plus ./bot $tokenbot $iduser && cd $HOME" >>/etc/autostart
             }
             [[ $(crontab -l | grep -c "verifbot") = '0' ]] && (
                 crontab -l 2>/dev/null
@@ -97,5 +97,5 @@ fun_instbot() {
         menu
     }
 }
-[[ -f "/etc/CrashVPN/ShellBot.sh" ]] && fun_botOnOff || fun_instbot
+[[ -f "/etc/NetOn/ShellBot.sh" ]] && fun_botOnOff || fun_instbot
 #fim
