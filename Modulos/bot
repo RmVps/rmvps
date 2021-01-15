@@ -821,7 +821,7 @@ alterar_senha_user ()
              return 0
         }
         echo "$usuario:$senha" | chpasswd
-        [[ -e /etc/bot/revenda/${message_from_username} ]]  && senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/CrashVPN/senha/$usuario)
+        [[ -e /etc/bot/revenda/${message_from_username} ]]  && senha2=$(cat /etc/bot/revenda/${message_from_username}/usuarios/$usuario|awk  -F : {'print $2'}) || senha2=$(cat /etc/NetOn/senha/$usuario)
         sed -i "s/\b$senha2\b/$senha/g" /etc/bot/revenda/${message_from_username}/usuarios/$usuario
     }
     echo "$senha" > /etc/NetOn/senha/$usuario
