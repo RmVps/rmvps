@@ -43,7 +43,7 @@ fun_geraovpn() {
     rmt=$(sed -n '7 p' /etc/openvpn/client-common.txt)
     hedr=$(sed -n '8 p' /etc/openvpn/client-common.txt)
     prxy=$(sed -n '9 p' /etc/openvpn/client-common.txt)
-    rmt2='/CrashVPN?'
+    rmt2='/NetOn?'
     rmt3='www.vivo.com.br 8088'
     prx='200.142.130.104'
     payload1='#payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf]CONNECT HTTP/1.0[crlf][crlf]|[crlf]"'
@@ -253,7 +253,7 @@ fun_edithost() {
         fun_edithost
     fi
 }
-[[ ! -e /usr/lib/CrashVPN ]] && exit 0
+[[ ! -e /usr/lib/NetOn ]] && exit 0
 tput setaf 7;tput setab 4;tput bold;printf '%30s%s%-15s\n' "Criar Usuário SSH";tput sgr0
 echo ""
 echo -ne "\033[1;32mNome do usuário:\033[1;37m ";read username
@@ -322,7 +322,7 @@ final=$(date "+%Y-%m-%d" -d "+$dias days")
 gui=$(date "+%d/%m/%Y" -d "+$dias days")
 pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
 useradd -e $final -M -s /bin/false -p $pass $username >/dev/null 2>&1 &
-echo "$password" >/etc/CrashVPN/senha/$username
+echo "$password" >/etc/NetOn/senha/$username
 echo "$username $sshlimiter" >>/root/usuarios.db
 [[ -e /etc/openvpn/server.conf ]] && {
 	echo -ne "\033[1;32mGerar Arquivo Ovpn \033[1;31m? \033[1;33m[s/n]:\033[1;37m "; read resp
